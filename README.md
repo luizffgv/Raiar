@@ -19,8 +19,8 @@ portrait orientation. This definition is used by Raiar's device mixins.
 
 ## JS components
 
-- [`raiar-alert`](raiar/components/alert.js)
-- [`raiar-slider`](raiar/components/slider.js)
+- [`raiar-alert`](components/alert.js)
+- [`raiar-slider`](components/slider.js)
 
 ## Inputs
 
