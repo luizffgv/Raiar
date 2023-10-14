@@ -1,0 +1,11 @@
+// Enables transitioning for the provided $properties in a specific element.
+@mixin transition($properties...) {
+  @if length($properties) == 0 {
+    @error "Mixin \"transition\" received an empty list.";
+  } @else if length($properties) == 1 {
+    transition: $properties var(--raiar-transition);
+  } @else {
+    transition: var(--raiar-transition);
+    transition-property: $properties;
+  }
+}

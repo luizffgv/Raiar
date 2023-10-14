@@ -1,0 +1,41 @@
+@use "sass:color";
+
+$bg: #f4f4f4 !default;
+$dark-bg: #1a1a1a !default;
+
+$bg-close: white !default;
+$dark-bg-close: #2b2b2b !default;
+
+$fieldset-bg: #f4f4f4 !default;
+$dark-fieldset-bg: #3a3a3a !default;
+
+// For elements inside a text list which are odd nth-children.
+$list-text-even-bg: #f4f4f4 !default;
+$dark-list-text-even-bg: #3a3a3a !default;
+
+$primary: #2d9bf0 !default;
+$dark-primary: #2d9bf0 !default;
+$danger: #f64c74 !default;
+$dark-danger: #f64c74 !default;
+$disabled: lightgrey !default;
+$dark-disabled: #555 !default;
+
+$fg: #222 !default;
+$dark-fg: #fafafa !default;
+
+$fg-on-primary: white !default;
+$dark-fg-on-primary: black !default;
+
+$interactive-bg: white !default;
+$dark-interactive-bg: #222 !default;
+
+$text-bubble-fg: black !default;
+$dark-text-bubble-fg: white !default;
+
+$slider-bg: #f4f4f4 !default;
+$dark-slider-bg: #3a3a3a !default;
+$slider-thumb: white !default;
+$dark-slider-thumb: #2b2b2b !default;
+
+$element-border: color.scale($fieldset-bg, $lightness: -10%) !default;
+$dark-element-border: color.scale($dark-fieldset-bg, $lightness: 10%) !default;

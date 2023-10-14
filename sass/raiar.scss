@@ -1,0 +1,572 @@
+@use "sass:meta";
+
+@forward "color" as color-*;
+@use "color" as color;
+
+@forward "variables";
+@use "variables" as *;
+
+@forward "mixins";
+@use "mixins" as *;
+
+@forward "device-mixins";
+@use "device-mixins" as device;
+
+@layer raiar-reset, raiar;
+
+// Returns meta.inspect($expression), for avoiding unquoting when interpolating.
+@function value($expression) {
+  @return meta.inspect($expression);
+}
+
+@layer raiar-reset {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer raiar {
+  // A small inline card containing inline text.
+  %text-bubble {
+    background-color: var(--raiar-color-interactive-bg);
+    border-radius: $text-bubble-border-radius;
+    box-shadow: var(--raiar-text-bubble-shadow);
+    color: var(--raiar-color-text-bubble-fg);
+    display: inline-block;
+    padding: $text-bubble-padding;
+  }
+
+  %shadow-soft {
+    box-shadow: var(--raiar-shadow);
+  }
+
+  %rounded {
+    border-radius: var(--raiar-border-radius);
+  }
+
+  :root {
+    //
+    // Variables
+    //
+    --raiar-shadow: #{value($shadow)};
+    --raiar-border-radius: #{value($border-radius)};
+    --raiar-transition: #{value($transition)};
+
+    --raiar-gap: #{value($gap)};
+
+    --raiar-card-padding: #{value($card-padding)};
+
+    --raiar-text-bubble-border-radius: #{value($text-bubble-border-radius)};
+    --raiar-text-bubble-padding: #{value($text-bubble-padding)};
+    --raiar-text-bubble-shadow: #{value($text-bubble-shadow)};
+
+    --raiar-button-border-radius: #{value($button-border-radius)};
+    --raiar-button-padding: #{value($button-padding)};
+
+    --raiar-details-padding: #{value($details-padding)};
+
+    --raiar-fieldset-padding: #{value($fieldset-padding)};
+
+    --raiar-text-input-border-radius: #{value($text-input-border-radius)};
+    --raiar-text-input-padding: #{value($text-input-padding)};
+
+    --raiar-alert-padding: #{value($alert-padding)};
+
+    --raiar-focus-outline-width: #{value($focus-outline-width)};
+
+    --raiar-font-size-small: #{value($font-size-small)};
+
+    --raiar-glow: 0 0 7.5px;
+    --raiar-glow-primary: var(--raiar-glow) var(--raiar-color-primary);
+
+    //
+    // Colors
+    //
+    --raiar-color-fg: #{value(color.$fg)};
+    --raiar-color-bg: #{value(color.$bg)};
+    --raiar-color-bg-close: #{value(color.$bg-close)};
+    --raiar-color-primary: #{value(color.$primary)};
+    --raiar-color-danger: #{value(color.$danger)};
+    --raiar-color-disabled: #{value(color.$disabled)};
+    --raiar-color-fieldset-bg: #{value(color.$fieldset-bg)};
+    --raiar-color-list-text-even-bg: #{value(color.$list-text-even-bg)};
+    --raiar-color-fg-on-primary: #{value(color.$fg-on-primary)};
+    --raiar-color-interactive-bg: #{value(color.$interactive-bg)};
+
+    --raiar-color-slider-bg: #{value(color.$slider-bg)};
+    --raiar-color-slider-thumb: #{value(color.$slider-thumb)};
+
+    --raiar-color-element-border: #{value(color.$element-border)};
+    --raiar-text-bubble-shadow: #{value($text-bubble-shadow)};
+
+    // --raiar-this-color is modified per element when using classes such as
+    // raiar-color-primary and raiar-color-danger. Its value is the color
+    // represented by the color class. You should use a fallback every time you
+    // use this variable.
+
+    &.raiar-dark {
+      //
+      // Dark colors
+      //
+      --raiar-color-fg: #{value(color.$dark-fg)};
+      --raiar-color-bg: #{value(color.$dark-bg)};
+      --raiar-color-bg-close: #{value(color.$dark-bg-close)};
+      --raiar-color-primary: #{value(color.$dark-primary)};
+      --raiar-color-danger: #{value(color.$dark-danger)};
+      --raiar-color-disabled: #{value(color.$dark-disabled)};
+      --raiar-color-fieldset-bg: #{value(color.$dark-fieldset-bg)};
+      --raiar-color-list-text-even-bg: #{value(color.$dark-list-text-even-bg)};
+      --raiar-color-fg-on-primary: #{value(color.$dark-fg-on-primary)};
+      --raiar-color-interactive-bg: #{value(color.$dark-interactive-bg)};
+
+      --raiar-color-slider-bg: #{value(color.$dark-slider-bg)};
+      --raiar-color-slider-thumb: #{value(color.$dark-slider-thumb)};
+
+      --raiar-color-text-bubble-fg: #{value(color.$dark-text-bubble-fg)};
+
+      --raiar-color-element-border: #{value(color.$dark-element-border)};
+    }
+  }
+
+  ::selection {
+    background-color: var(--raiar-color-primary);
+  }
+
+  body {
+    background-color: var(--raiar-color-bg);
+    color: var(--raiar-color-fg);
+  }
+
+  button,
+  input[type="button"],
+  input[type="submit"] {
+    @extend %shadow-soft;
+
+    --raiar-color: var(--raiar-this-color, var(--raiar-color-primary));
+
+    background-color: var(--raiar-color-interactive-bg);
+    border-radius: $button-border-radius;
+    border: none;
+    color: var(--raiar-color);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: var(--raiar-button-padding);
+    transition-property: background-color, box-shadow, color;
+    transition: var(--raiar-transition);
+    user-select: none;
+
+    &:not(:disabled):hover {
+      background-color: var(--raiar-color);
+      box-shadow: var(--raiar-glow) var(--raiar-color);
+      color: var(--raiar-color-fg-on-primary);
+      cursor: pointer;
+    }
+
+    &:disabled {
+      color: var(--raiar-color-disabled);
+    }
+  }
+
+  // Elements containing <details> are expected to only contain <details>
+  // elements.
+  :has(> details) {
+    @extend %rounded;
+
+    background-color: var(--raiar-color-bg-close);
+    border: 1px solid var(--raiar-color-element-border);
+
+    details {
+      @include transition(color);
+
+      color: transparent;
+      padding: var(--raiar-details-padding);
+
+      summary {
+        @include transition(margin-bottom);
+
+        --raiar-color: var(--raiar-this-color, var(--raiar-color-fg));
+
+        align-items: flex-start;
+        background-position: center;
+        color: var(--raiar-color);
+        cursor: pointer;
+        display: flex;
+        font-weight: 700;
+        justify-content: space-between;
+        list-style: none;
+
+        &::after {
+          @include transition(transform);
+
+          --raiar-this-bg-img: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --%3E%3Csvg width='800px' height='800px' viewBox='0 -4.5 20 20' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3Earrow_up %5B%23337%5D%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Dribbble-Light-Preview' transform='translate(-260.000000, -6684.000000)' fill='%23000000'%3E%3Cg id='icons' transform='translate(56.000000, 160.000000)'%3E%3Cpath d='M223.707692,6534.63378 L223.707692,6534.63378 C224.097436,6534.22888 224.097436,6533.57338 223.707692,6533.16951 L215.444127,6524.60657 C214.66364,6523.79781 213.397472,6523.79781 212.616986,6524.60657 L204.29246,6533.23165 C203.906714,6533.6324 203.901717,6534.27962 204.282467,6534.68555 C204.671211,6535.10081 205.31179,6535.10495 205.70653,6534.69695 L213.323521,6526.80297 C213.714264,6526.39807 214.346848,6526.39807 214.737591,6526.80297 L222.294621,6534.63378 C222.684365,6535.03868 223.317949,6535.03868 223.707692,6534.63378' id='arrow_up-%5B%23337%5D'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+          background-color: var(--raiar-color);
+          content: "";
+          flex-shrink: 0;
+          height: 16px;
+          margin-left: 24px;
+          mask-image: var(--raiar-this-bg-img);
+          -webkit-mask-image: var(--raiar-this-bg-img);
+          mask-size: cover;
+          -webkit-mask-size: cover;
+          transform: rotate(180deg);
+          width: 16px;
+        }
+      }
+
+      &[open] {
+        color: var(--raiar-color-fg);
+
+        summary {
+          margin-bottom: 8px;
+
+          &::after {
+            transform: none;
+          }
+        }
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--raiar-color-element-border);
+      }
+    }
+  }
+
+  fieldset {
+    @extend .raiar-gap;
+
+    align-items: flex-start;
+    background-color: var(--raiar-color-fieldset-bg);
+    border-radius: $border-radius;
+    border: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding: var(--raiar-fieldset-padding);
+    text-align: center;
+
+    > legend {
+      float: left; // Moves the legend inside the fieldset
+      font-weight: 700;
+      width: 100%;
+    }
+  }
+
+  label {
+    &:has(textarea) {
+      @extend %shadow-soft;
+
+      @include transition(outline);
+
+      --raiar-this-color-fallback: var(
+        --raiar-this-color,
+        var(--raiar-color-primary)
+      );
+
+      background-color: var(--raiar-color-interactive-bg);
+      border-radius: $text-input-border-radius;
+      box-sizing: border-box;
+      caret-color: var(--raiar-this-color-fallback);
+      color: var(--raiar-this-color);
+      display: flex;
+      flex-direction: column;
+      font-size: $font-size-small;
+      font-weight: 700;
+      outline: var(--raiar-focus-outline-width) solid transparent;
+      overflow: hidden;
+      padding: $text-input-padding;
+      text-align: center;
+
+      &:focus-within {
+        outline: var(--raiar-focus-outline-width) solid
+          var(--raiar-this-color-fallback);
+      }
+
+      &:has(:disabled) {
+        color: var(--raiar-color-disabled);
+
+        textarea {
+          color: var(--raiar-color-disabled);
+        }
+      }
+
+      textarea {
+        background: none;
+        border: none;
+        box-sizing: border-box;
+        color: var(--raiar-color-fg);
+        outline: none;
+        padding: $text-input-padding;
+        resize: vertical;
+        width: 100%;
+      }
+    }
+
+    &:has(
+        :is(
+            input:not([type]),
+            input[type="email"],
+            input[type="password"],
+            input[type="search"],
+            input[type="text"],
+            input[type="url"]
+          )
+      ) {
+      @extend %shadow-soft;
+
+      @include transition(outline);
+
+      --raiar-this-color-fallback: var(
+        --raiar-this-color,
+        var(--raiar-color-primary)
+      );
+
+      align-items: baseline;
+      background-color: var(--raiar-color-interactive-bg);
+      border-radius: $text-input-border-radius;
+      box-sizing: border-box;
+      color: var(--raiar-this-color);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: $font-size-small;
+      font-weight: 700;
+      justify-content: center;
+      outline: var(--raiar-focus-outline-width) solid transparent;
+      overflow: hidden;
+      padding: var(--raiar-text-input-padding);
+
+      &:focus-within {
+        outline: var(--raiar-focus-outline-width) solid
+          var(--raiar-this-color-fallback);
+      }
+
+      // Perfectly align the inputs with each other in a horizontal fieldset
+      &:is(fieldset:not(.raiar-horizontal) &) {
+        width: 100%;
+      }
+
+      &:has(:disabled) {
+        color: var(--raiar-color-disabled);
+      }
+
+      > input {
+        // The smallest text input in a container will have this width
+        width: 256px;
+        @include device.mobile {
+          width: 128px;
+        }
+
+        background: transparent;
+        border: none;
+        box-sizing: border-box;
+        caret-color: var(--raiar-this-color-fallback);
+        color: var(--raiar-color-fg);
+        flex-grow: 1;
+        font-size: 1rem;
+        padding: 4px 8px;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:invalid {
+          color: var(--raiar-color-danger);
+        }
+      }
+    }
+
+    &:has(input[type="checkbox"]) {
+      @extend %text-bubble;
+
+      @include transition(background-color, color, box-shadow);
+
+      --raiar-color: var(--raiar-this-color, var(--raiar-color-primary));
+
+      user-select: none;
+
+      &:has(:disabled) {
+        &:has(:not(:checked)) {
+          color: var(--raiar-color-disabled);
+        }
+        --raiar-color: var(--raiar-color-disabled);
+      }
+
+      &:not(:has(:disabled)):hover {
+        cursor: pointer;
+      }
+
+      &:has(:checked) {
+        background-color: var(--raiar-color);
+        box-shadow: var(--raiar-glow) var(--raiar-color);
+        color: var(--raiar-color-fg-on-primary);
+
+        &:has(.raiar-checkmark):before {
+          opacity: 1;
+        }
+      }
+
+      &:not(:has(:checked, :disabled)):hover {
+        color: var(--raiar-this-color, var(--raiar-color-primary));
+      }
+
+      &:has(.raiar-checkmark) {
+        align-items: center;
+        display: inline-flex;
+        text-align: left; // So the start of each line sticks to the checkmark.
+
+        &:before {
+          @include transition(opacity);
+
+          content: "✓";
+          opacity: 0;
+          padding-right: 8px;
+        }
+      }
+
+      > input {
+        display: none;
+      }
+    }
+
+    &:has(input[type="radio"]) {
+      @extend %text-bubble;
+
+      @include transition(color);
+
+      --raiar-color: var(--raiar-this-color, var(--raiar-color-primary));
+
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      user-select: none;
+
+      &:has(:disabled) {
+        --raiar-color: var(--raiar-color-disabled);
+        color: var(--raiar-color-disabled);
+      }
+
+      &:not(:has(:disabled)):hover {
+        color: var(--raiar-color);
+        cursor: pointer;
+      }
+
+      > input {
+        @include transition(border-width, box-shadow);
+
+        appearance: none;
+        aspect-ratio: 1/1;
+        border-radius: calc(infinity * 1px);
+        border: 2px solid var(--raiar-color);
+        cursor: inherit;
+        width: 16px;
+
+        &:checked {
+          border-width: 8px;
+          box-shadow: var(--raiar-glow) var(--raiar-color);
+        }
+      }
+    }
+  }
+
+  ul.raiar-list-text {
+    list-style: none;
+
+    // We only apply the "card" look to top-level (not nested) text lists.
+    &:not(& &) {
+      @include device.mobile {
+        width: 100%;
+      }
+
+      background-color: var(--raiar-color-bg-close);
+      border-radius: $border-radius;
+      border: 1px solid var(--raiar-color-element-border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      list-style: none;
+
+      > li {
+        padding: 8px;
+
+        &:nth-child(even) {
+          background-color: var(--raiar-color-list-text-even-bg);
+        }
+      }
+    }
+
+    & & {
+      margin-left: 2ch;
+
+      > li {
+        padding: 8px 0;
+      }
+    }
+
+    & > li {
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--raiar-color-element-border);
+      }
+    }
+  }
+
+  .raiar-card {
+    @extend %rounded, %shadow-soft, .raiar-gap;
+
+    align-items: start;
+    background-color: var(--raiar-color-bg-close);
+    display: flex;
+    flex-direction: column;
+    padding: var(--raiar-card-padding);
+  }
+
+  // Sets a standard gap between flex children.
+  .raiar-gap {
+    display: flex;
+    gap: var(--raiar-gap);
+  }
+
+  .raiar-vertical {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .raiar-horizontal {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .raiar-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .raiar-color-primary {
+    --raiar-this-color: var(--raiar-color-primary);
+  }
+
+  .raiar-color-danger {
+    --raiar-this-color: var(--raiar-color-danger);
+  }
+
+  .raiar-color-primary,
+  .raiar-color-danger {
+    --raiar-glow-this-color: 0 0 7.5px var(--raiar-this-color);
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                 Components                                 */
+  /* -------------------------------------------------------------------------- */
+
+  /* Beware when styling ::part because some pseudo-elements can't be selected
+     after ::part in Chromium.
+     See https://bugs.chromium.org/p/chromium/issues/detail?id=1047114 */
+
+  raiar-slider {
+    &:is(fieldset &)::part(slider) {
+      background-color: var(--raiar-color-bg-close);
+    }
+  }
+}
