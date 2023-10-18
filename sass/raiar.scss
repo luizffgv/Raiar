@@ -51,6 +51,8 @@
     //
     --raiar-shadow: #{value($shadow)};
     --raiar-border-radius: #{value($border-radius)};
+    --raiar-transition-duration: #{value($transition-duration)};
+    --raiar-transition-easing: #{value($transition-easing)};
     --raiar-transition: #{value($transition)};
 
     --raiar-gap: #{value($gap)};
@@ -76,6 +78,8 @@
     --raiar-focus-outline-width: #{value($focus-outline-width)};
 
     --raiar-font-size-small: #{value($font-size-small)};
+
+    --raiar-svg-close: #{value($svg-close)};
 
     --raiar-glow: 0 0 7.5px;
     --raiar-glow-primary: var(--raiar-glow) var(--raiar-color-primary);
@@ -136,6 +140,11 @@
   body {
     background-color: var(--raiar-color-bg);
     color: var(--raiar-color-fg);
+
+    &:has(raiar-modal) {
+      // Prevent scrolling the background.
+      overflow-y: hidden;
+    }
   }
 
   button,
