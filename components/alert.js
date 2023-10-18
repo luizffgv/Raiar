@@ -27,6 +27,7 @@ export default class Alert extends Component({
     #container {
       border-radius: var(--raiar-border-radius);
       box-shadow: var(--raiar-shadow-soft);
+      contain: content;
       display: flex;
       gap: 16px;
       justify-content: space-between;
@@ -44,7 +45,6 @@ export default class Alert extends Component({
     }
 
     #content::slotted(*) {
-      position: relative;
       z-index: 1;
     }
 
