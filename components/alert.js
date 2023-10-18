@@ -16,10 +16,9 @@ import { Component } from "./component.js";
  *
  */
 export default class Alert extends Component({
-  imperativeSlotting: true,
   template: html`
     <div id="container">
-      <slot id="content" name="content"></slot>
+      <slot id="content"></slot>
       <button id="button-close"></button>
       <div id="color-overlay"></div>
     </div>
@@ -93,12 +92,6 @@ export default class Alert extends Component({
     );
   }
 
-  get #contentElement() {
-    return /** @type {HTMLSlotElement} */ (
-      this.shadowRoot.getElementById("content")
-    );
-  }
-
   /**
    * Whether the alert was dismissed.
    *
@@ -113,18 +106,13 @@ export default class Alert extends Component({
    * @param {string | HTMLElement} content
    */
   set content(content) {
-    let slotted;
-
     if (content instanceof HTMLElement) {
       this.replaceChildren(content);
-      slotted = content;
     } else {
-      slotted = document.createElement("p");
-      this.replaceChildren(slotted);
+      const slotted = document.createElement("p");
       slotted.textContent = content;
+      this.replaceChildren(slotted);
     }
-
-    this.#contentElement.assign(slotted);
   }
 
   /**
