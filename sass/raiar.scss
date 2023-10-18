@@ -147,6 +147,10 @@
     }
   }
 
+  a {
+    color: var(--raiar-this-color, var(--raiar-color-primary));
+  }
+
   button,
   input[type="button"],
   input[type="submit"] {
