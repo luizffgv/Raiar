@@ -151,6 +151,7 @@
     color: var(--raiar-this-color, var(--raiar-color-primary));
   }
 
+  a.button,
   button,
   input[type="button"],
   input[type="submit"] {
@@ -162,9 +163,11 @@
     border-radius: $button-border-radius;
     border: none;
     color: var(--raiar-color);
+    display: block;
     font-size: 1rem;
     font-weight: 700;
     padding: var(--raiar-button-padding);
+    text-decoration: none;
     transition-property: background-color, box-shadow, color;
     transition: var(--raiar-transition);
     user-select: none;
