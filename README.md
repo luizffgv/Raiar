@@ -20,6 +20,7 @@ portrait orientation. This definition is used by Raiar's device mixins.
 ## JS components
 
 - [`raiar-alert`](components/alert.js)
+- [`raiar-modal`](components/modal.js)
 - [`raiar-slider`](components/slider.js)
 
 ## Inputs
