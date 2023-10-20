@@ -50,7 +50,10 @@ export default class Modal extends Component({
       background-color: var(--raiar-color-bg-close);
       border-radius: var(--raiar-border-radius);
       box-shadow: var(--raiar-shadow);
+      box-sizing: border-box;
       display: flex;
+      max-height: 100%;
+      overflow-y: auto;
       padding: var(--raiar-card-padding);
     }
 
