@@ -235,7 +235,7 @@
         color: var(--raiar-color-fg);
 
         summary {
-          margin-bottom: 8px;
+          margin-bottom: var(--raiar-gap);
 
           &::after {
             transform: none;
