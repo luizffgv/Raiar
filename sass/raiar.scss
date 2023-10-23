@@ -80,6 +80,7 @@
     --raiar-font-size-small: #{value($font-size-small)};
 
     --raiar-svg-close: #{value($svg-close)};
+    --raiar-close-button-size: #{value($close-button-size)};
 
     --raiar-glow: 0 0 7.5px;
     --raiar-glow-primary: var(--raiar-glow) var(--raiar-color-primary);

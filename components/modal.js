@@ -74,7 +74,7 @@ export default class Modal extends Component({
       mask-image: var(--raiar-svg-close);
       mask-size: cover;
       transition: background-color var(--raiar-transition);
-      width: 20px;
+      width: var(--raiar-close-button-size);
 
       &:hover {
         background-color: var(--raiar-color-danger);

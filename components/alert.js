@@ -57,7 +57,7 @@ export default class Alert extends Component({
       -webkit-mask-image: var(--raiar-svg-close);
       mask-size: cover;
       -webkit-mask-size: cover;
-      width: 16px;
+      width: var(--raiar-close-button-size);
       aspect-ratio: 1/1;
       flex-shrink: 0;
       transition: background-color var(--raiar-transition);
