@@ -402,6 +402,7 @@
 
       --raiar-color: var(--raiar-this-color, var(--raiar-color-primary));
 
+      contain: layout;
       user-select: none;
 
       &:has(:disabled) {
@@ -444,7 +445,12 @@
       }
 
       > input {
-        display: none;
+        // The input must be selectable by tab so it can't have display: none
+
+        appearance: none;
+        border-radius: inherit;
+        inset: 0;
+        position: absolute;
       }
     }
 
