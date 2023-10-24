@@ -108,34 +108,35 @@ export default class Slider extends Component({
     }
   `,
 }) {
+  static formAssociated = true;
+
   /** @type {{[key in typeof Slider.observedAttributes[number]]: (this: Slider, value: string | null) => void}} */
   static #handlers = {
     "data-min": function (value) {
       setAttribute(this.#slider, "min", value);
-      this.#updateDisplayValue();
+      this.#updateValue();
     },
     "data-max": function (value) {
       setAttribute(this.#slider, "max", value);
-      this.#updateDisplayValue();
+      this.#updateValue();
     },
     "data-value": function (value) {
       setAttribute(this.#slider, "value", value);
-      this.#updateDisplayValue();
+      this.#updateValue();
     },
     "data-step": function (value) {
       setAttribute(this.#slider, "step", value);
-      this.#updateDisplayValue();
+      this.#updateValue();
     },
     "data-label": function (value) {
       this.#label.textContent = value;
     },
     "data-assoc": function () {
       this.#updateAssociations();
-      this.#updateDisplayValue();
     },
     "data-suffix": function (value) {
       this.#suffix = value ?? "";
-      this.#updateDisplayValue();
+      this.#updateValue();
     },
   };
 
@@ -149,6 +150,9 @@ export default class Slider extends Component({
     "data-suffix",
   ]);
 
+  /** @type {ElementInternals} */
+  #internals;
+
   /** @type {{[index: string]: string}?} */
   #associations = null;
 
@@ -157,10 +161,12 @@ export default class Slider extends Component({
   constructor() {
     super();
 
+    this.#internals = this.attachInternals();
+
     this.#updateAssociations();
 
     this.#slider.addEventListener("input", () => {
-      this.#updateDisplayValue();
+      this.#updateValue();
     });
   }
 
@@ -186,14 +192,21 @@ export default class Slider extends Component({
   }
 
   /**
-   * Updates the displayed value with the slider value.
+   * Updates the displayed value and form value with the slider value.
+   *
+   * @remarks
+   * The form value is the raw value, ignoring `data-assoc`.
    */
-  #updateDisplayValue() {
-    let newValue;
+  #updateValue() {
+    const rawValue = this.#slider.value;
 
-    newValue = this.#associations?.[this.#slider.value] ?? this.#slider.value;
+    let newValue;
+    newValue = this.#associations?.[this.#slider.value] ?? rawValue;
+
+    this.#internals.setFormValue(rawValue);
 
     this.#valueElement.textContent = newValue + this.#suffix;
+    this.#slider.ariaValueText = this.#valueElement.textContent;
   }
 
   /**
@@ -210,6 +223,8 @@ export default class Slider extends Component({
         );
       this.#associations = associations;
     }
+
+    this.#updateValue();
   }
 
   /**
