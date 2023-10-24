@@ -200,7 +200,7 @@ export default class Slider extends Component({
    * Updates the slider's association map.
    */
   #updateAssociations() {
-    const rawAssociations = this.getAttribute("data-assoc");
+    const rawAssociations = this.dataset["assoc"];
 
     if (rawAssociations != null) {
       const associations = JSON.parse(rawAssociations);
