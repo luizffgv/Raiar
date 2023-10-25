@@ -28,6 +28,7 @@ export default class Modal extends Component({
         <slot id="slot"></slot>
         <raiar-internal-close-button
           id="button-close"
+          aria-label="Close modal"
         ></raiar-internal-close-button>
       </div>
     </div>

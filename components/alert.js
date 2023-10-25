@@ -23,6 +23,7 @@ export default class Alert extends Component({
       <slot id="content"></slot>
       <raiar-internal-close-button
         id="button-close"
+        aria-label="Close alert"
       ></raiar-internal-close-button>
       <div id="color-overlay"></div>
     </div>

@@ -6,6 +6,10 @@ import { Component } from "../component.js";
  *
  * @remarks
  * Should close or remove something on click.
+ *
+ * Attributes:
+ * - Optional:
+ *   - `aria-label` (text): ARIA label forwarded to the button.
  */
 export default class CloseButton extends Component({
   template: html`<button id="button" type="button"></button> `,
@@ -41,6 +45,31 @@ export default class CloseButton extends Component({
       }
     }
   `,
-}) {}
+}) {
+  static observedAttributes = /** @type {const} */ (["aria-label"]);
+
+  /** @type {{[key in typeof CloseButton.observedAttributes[number]]: (this: CloseButton, value: string | null) => void}} */
+  static #handlers = {
+    "aria-label": function (value) {
+      this.#button.ariaLabel = value;
+    },
+  };
+
+  get #button() {
+    return /** @type {HTMLButtonElement} */ (
+      this.shadowRoot.getElementById("button")
+    );
+  }
+
+  /**
+   * @internal
+   * @param {CloseButton.observedAttributes[number]} name
+   * @param {string} _oldValue
+   * @param {string} newValue
+   */
+  attributeChangedCallback(name, _oldValue, newValue) {
+    CloseButton.#handlers[name]?.bind(this)(newValue);
+  }
+}
 
 customElements.define("raiar-internal-close-button", CloseButton);
