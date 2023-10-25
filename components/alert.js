@@ -1,5 +1,7 @@
 import { css, html } from "../internal/tags.js";
 import { Component } from "./component.js";
+// @ts-ignore This component is used inside the alert
+import CloseButton from "./internal/close-button.js";
 
 /**
  * A dismissible alert element.
@@ -19,7 +21,9 @@ export default class Alert extends Component({
   template: html`
     <div id="container">
       <slot id="content"></slot>
-      <button id="button-close"></button>
+      <raiar-internal-close-button
+        id="button-close"
+      ></raiar-internal-close-button>
       <div id="color-overlay"></div>
     </div>
   `,
@@ -46,25 +50,6 @@ export default class Alert extends Component({
 
     #content::slotted(*) {
       z-index: 1;
-    }
-
-    #button-close {
-      cursor: pointer;
-      padding: 0;
-      border: none;
-      background-color: var(--raiar-color-fg);
-      mask-image: var(--raiar-svg-close);
-      -webkit-mask-image: var(--raiar-svg-close);
-      mask-size: cover;
-      -webkit-mask-size: cover;
-      width: var(--raiar-close-button-size);
-      aspect-ratio: 1/1;
-      flex-shrink: 0;
-      transition: background-color var(--raiar-transition);
-
-      &:hover {
-        background-color: var(--raiar-color-danger);
-      }
     }
 
     #color-overlay {
@@ -133,12 +118,12 @@ export default class Alert extends Component({
    * alert.
    */
   set userDismissible(dismissible) {
-    this.#buttonClose.style.display = dismissible ? "block" : "none";
+    this.#buttonClose.style.display = dismissible ? "" : "none";
   }
 
   /** Whether the user can manually dismiss the alert. */
   get userDismissible() {
-    return this.#buttonClose.style.display == "block";
+    return this.#buttonClose.style.display != "none";
   }
 
   constructor() {

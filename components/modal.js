@@ -1,6 +1,8 @@
 import { CSSDurationToMs } from "../internal/conversions.js";
 import { css, html } from "../internal/tags.js";
 import { Component } from "./component.js";
+// @ts-ignore This component is used inside the modal
+import CloseButton from "./internal/close-button.js";
 
 /**
  * A modal window.
@@ -24,7 +26,9 @@ export default class Modal extends Component({
     <div id="container">
       <div id="card" role="dialog" aria-modal="true">
         <slot id="slot"></slot>
-        <div id="button-close"></div>
+        <raiar-internal-close-button
+          id="button-close"
+        ></raiar-internal-close-button>
       </div>
     </div>
   `,
@@ -62,24 +66,6 @@ export default class Modal extends Component({
       flex-direction: column;
       gap: var(--raiar-gap);
     }
-
-    #button-close {
-      -webkit-mask-image: var(--raiar-svg-close);
-      -webkit-mask-size: cover;
-      aspect-ratio: 1/1;
-      background-color: var(--raiar-color-fg);
-      content: "";
-      cursor: pointer;
-      flex-shrink: 0;
-      mask-image: var(--raiar-svg-close);
-      mask-size: cover;
-      transition: background-color var(--raiar-transition);
-      width: var(--raiar-close-button-size);
-
-      &:hover {
-        background-color: var(--raiar-color-danger);
-      }
-    }
   `,
 }) {
   #appearAnimation;
@@ -104,7 +90,7 @@ export default class Modal extends Component({
    * modal window using the close button.
    */
   set userDismissible(dismissible) {
-    this.#buttonClose.style.display = dismissible ? "block" : "none";
+    this.#buttonClose.style.display = dismissible ? "" : "none";
   }
 
   /** Whether the user can manually dismiss the modal window. */
