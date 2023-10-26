@@ -324,14 +324,12 @@
     }
 
     &:has(
-        :is(
-            input:not([type]),
-            input[type="email"],
-            input[type="password"],
-            input[type="search"],
-            input[type="text"],
-            input[type="url"]
-          )
+        input:not([type]),
+        input[type="email"],
+        input[type="password"],
+        input[type="search"],
+        input[type="text"],
+        input[type="url"]
       ) {
       @extend %shadow-soft;
 
@@ -362,7 +360,7 @@
       }
 
       // Perfectly align the inputs with each other in a vertical fieldset
-      &:is(fieldset:not(.raiar.flex-row) &) {
+      fieldset:not(.raiar.flex-row) & {
         width: 100%;
       }
 
