@@ -12,7 +12,9 @@
 @forward "device-mixins";
 @use "device-mixins" as device;
 
-@layer raiar-reset, raiar;
+@forward "utils";
+
+@layer raiar-reset, raiar, raiar-utils;
 
 // Returns meta.inspect($expression), for avoiding unquoting when interpolating.
 @function value($expression) {

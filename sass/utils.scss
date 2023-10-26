@@ -1,0 +1,118 @@
+@use "variables" as *;
+
+@layer raiar-utils {
+  .raiar {
+    &.align-items {
+      &-baseline {
+        align-items: baseline;
+        display: flex;
+      }
+
+      &-center {
+        align-items: center;
+        display: flex;
+      }
+
+      &-end {
+        align-items: flex-end;
+        display: flex;
+      }
+
+      &-start {
+        align-items: flex-start;
+        display: flex;
+      }
+
+      &-stretch {
+        align-items: stretch;
+        display: flex;
+      }
+    }
+
+    &.flex {
+      &-nowrap {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+
+      &-wrap {
+        display: flex;
+        flex-wrap: wrap;
+
+        &-rev {
+          display: flex;
+          flex-wrap: wrap-reverse;
+        }
+      }
+    }
+
+    &.flex {
+      &-col {
+        display: flex;
+        flex-direction: column;
+
+        &-rev {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+      }
+
+      &-row {
+        display: flex;
+        flex-direction: row;
+
+        &-rev {
+          display: flex;
+          flex-direction: row-reverse;
+        }
+      }
+    }
+
+    &.gap {
+      display: flex;
+      gap: $gap;
+
+      &-2x {
+        display: flex;
+        gap: $gap * 2;
+      }
+
+      &-4x {
+        display: flex;
+        gap: $gap * 4;
+      }
+    }
+
+    &.justify-content {
+      &-around {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      &-between {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      &-center {
+        display: flex;
+        justify-content: center;
+      }
+
+      &-end {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      &-evenly {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      &-start {
+        display: flex;
+        justify-content: flex-start;
+      }
+    }
+  }
+}
