@@ -49,22 +49,6 @@ The following inputs must be nested inside a `<label>`:
 
   Makes a block pop out as a card, with rounded edges and a drop shadow.
 
-- `raiar-gap`
-
-  Makes a container `flex` and sets a standard gap between its children.
-
-- `raiar-vertical`
-
-  Makes a container `flex` and sets its `flex-direction` to `column`.
-
-- `raiar-horizontal`
-
-  Makes a container `flex` and sets its `flex-direction` to `row`.
-
-- `raiar-wrap`
-
-  Makes a container `flex` and sets sets `flex-wrap: wrap`.
-
 - `raiar-checkmark`
 
   Applies to `<input type="checkbox">`.  
@@ -75,3 +59,107 @@ The following inputs must be nested inside a `<label>`:
   Applies to `<ul>`.  
   Marks the list as a list containing only text elements, or other
   `.raiar-list-text`.
+
+### Utility classes
+
+You can enable utility classes for an element by adding the `raiar` class.
+Utility classes are sometimes composed by a prefix and a suffix. Don't use a
+prefix or a suffix in isolation.
+
+- Prefix `align-items`
+
+  All the following suffixes set `display: flex`.
+
+  - Suffix `-baseline`
+
+    Sets `align-items: baseline`.
+
+  - Suffix `-center`
+
+    Sets `align-items: center`.
+
+  - Suffix `-end`
+
+    Sets `align-items: flex-end`.
+
+  - Suffix `-start`
+
+    Sets `align-items: flex-end`.
+
+  - Suffix `-stretch`
+
+    Sets `align-items: stretch`.
+
+- Prefix `flex`
+
+  All the following suffixes set `display: flex`.
+
+  - Suffix `-nowrap`
+
+    Sets `flex-wrap: nowrap`
+
+  - Suffix `-wrap`
+
+    Sets `flex-wrap: wrap`
+
+  - Suffix `-wrap-rev`
+
+    Sets `flex-wrap: wrap-reverse`
+
+  - Suffix `col`
+
+    Sets `flex-direction: column`
+
+  - Suffix `col-rev`
+
+    Sets `flex-direction: column-reverse`
+
+  - Suffix `row`
+
+    Sets `flex-direction: row`
+
+  - Suffix `row-rev`
+
+    Sets `flex-direction: row-reverse`
+
+- Prefix `gap`
+
+  - No suffix
+
+    Sets `display: flex` and sets a standard gap between children.
+
+  - Suffix `-2x`
+
+    Same as `gap`, but the gap is twice as large.
+
+  - Suffix `-4x`
+
+    Same as `gap-2x`, but the gap is twice as large.
+
+- Prefix `justify-content`
+
+  All of the following prefixes set `display: flex`.
+
+  - Suffix `-around`
+
+    Sets `justify-content: space-around`.
+
+  - Suffix `-between`
+
+    Sets `justify-content: space-between`.
+
+  - Suffix `-center`
+
+    Sets `justify-content: center`.
+
+  - Suffix `-end`
+
+    Sets `justify-content: flex-end`.
+
+  - Suffix `-evenly`
+
+    Sets `justify-content: space-evenly`.
+
+  - Suffix `-start`
+
+    Sets `justify-content: flex-start`.
