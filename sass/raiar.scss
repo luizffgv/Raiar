@@ -361,7 +361,7 @@
           var(--raiar-this-color-fallback);
       }
 
-      // Perfectly align the inputs with each other in a horizontal fieldset
+      // Perfectly align the inputs with each other in a vertical fieldset
       &:is(fieldset:not(.raiar.flex-row) &) {
         width: 100%;
       }
