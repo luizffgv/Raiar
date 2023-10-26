@@ -362,7 +362,7 @@
       }
 
       // Perfectly align the inputs with each other in a horizontal fieldset
-      &:is(fieldset:not(.raiar-horizontal) &) {
+      &:is(fieldset:not(.raiar.flex-row) &) {
         width: 100%;
       }
 
@@ -541,21 +541,6 @@
 
     background-color: var(--raiar-color-bg-close);
     padding: var(--raiar-card-padding);
-  }
-
-  .raiar-vertical {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .raiar-horizontal {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .raiar-wrap {
-    display: flex;
-    flex-wrap: wrap;
   }
 
   .raiar-color-primary {
