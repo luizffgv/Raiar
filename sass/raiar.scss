@@ -538,10 +538,7 @@
   .raiar-card {
     @extend %rounded, %shadow-soft, .raiar-gap;
 
-    align-items: start;
     background-color: var(--raiar-color-bg-close);
-    display: flex;
-    flex-direction: column;
     padding: var(--raiar-card-padding);
   }
 
