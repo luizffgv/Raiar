@@ -251,8 +251,6 @@
   }
 
   fieldset {
-    @extend .raiar-gap;
-
     align-items: flex-start;
     background-color: var(--raiar-color-fieldset-bg);
     border-radius: $border-radius;
@@ -261,6 +259,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    gap: var(--raiar-gap);
     justify-content: start;
     padding: var(--raiar-fieldset-padding);
     text-align: center;
@@ -536,16 +535,10 @@
   }
 
   .raiar-card {
-    @extend %rounded, %shadow-soft, .raiar-gap;
+    @extend %rounded, %shadow-soft;
 
     background-color: var(--raiar-color-bg-close);
     padding: var(--raiar-card-padding);
-  }
-
-  // Sets a standard gap between flex children.
-  .raiar-gap {
-    display: flex;
-    gap: var(--raiar-gap);
   }
 
   .raiar-vertical {
