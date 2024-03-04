@@ -3,13 +3,14 @@ import { Component, setAttribute } from "./component.js";
 
 const RANGE_THUMB_STYLE = css`
   --track-fill-size: 999999px; /* calc(infinity * 1px) doesn't work here */
+  --raiar-color: var(--raiar-this-color, var(--raiar-color-primary));
 
   width: 16px;
   height: 16px;
   transition: border var(--raiar-transition);
-  border: 2px solid var(--raiar-color-primary);
+  border: 2px solid var(--raiar-color);
   box-shadow: calc(0px - var(--track-fill-size)) 0 0
-    calc(var(--track-fill-size) - 8px) var(--raiar-color-primary);
+    calc(var(--track-fill-size) - 8px) var(--raiar-color);
   appearance: none;
   background-color: var(--raiar-color-slider-thumb);
   border-radius: calc(infinity * 1px);
