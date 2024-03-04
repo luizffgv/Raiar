@@ -23,15 +23,15 @@ import CloseButton from "./internal/close-button.js";
  */
 export default class Modal extends Component({
   template: html`
-    <div id="container">
-      <div id="card" role="dialog" aria-modal="true">
+    <dialog id="container" aria-modal="true">
+      <div id="card">
         <slot id="slot"></slot>
         <raiar-internal-close-button
           id="button-close"
           aria-label="Close modal"
         ></raiar-internal-close-button>
       </div>
-    </div>
+    </dialog>
   `,
 
   styles: css`
@@ -39,11 +39,16 @@ export default class Modal extends Component({
       align-items: center;
       backdrop-filter: blur(35px);
       background-color: #0009;
+      border: none;
       box-sizing: border-box;
+      color: inherit;
       display: flex;
       height: 100vh;
       justify-content: center;
       left: 0;
+      margin: 0;
+      max-height: 100vh;
+      max-width: 100vw;
       padding: 16px;
       position: fixed;
       top: 0;
@@ -78,7 +83,7 @@ export default class Modal extends Component({
   }
 
   get #container() {
-    return /** @type {HTMLElement} */ (
+    return /** @type {HTMLDialogElement} */ (
       this.shadowRoot.getElementById("container")
     );
   }
@@ -130,6 +135,7 @@ export default class Modal extends Component({
   }
 
   connectedCallback() {
+    this.#container.showModal();
     this.#appearAnimation.play();
   }
 
